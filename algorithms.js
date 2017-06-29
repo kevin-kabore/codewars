@@ -5,7 +5,6 @@
 
 // The output is the index in array of target:
 
-
 // 1. Let min = 0 and max = n-1.
 // 2. If max < min, then stop: target is not present in array. Return -1.
 // 3. Compute guess as the average of max and min, rounded down (so that it is an integer).
@@ -14,6 +13,9 @@
 // 6. Otherwise, the guess  was too high. Set max = guess - 1.
 // 7. Go back to step 2.
 
+
+// RUNTIME of Binary search: max gusses = number of times can halve, starting at n until we get 1, plus one
+// 2^n = length of array; where n + 1 = total guesses
 
 // binary search
 function binarySearch (array, targetValue) {
