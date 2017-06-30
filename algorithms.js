@@ -70,3 +70,158 @@ println("Found prime at index " + result);
 Program.assertEqual(doSearch(primes, 73), 20);
 Program.assertEqual(doSearch(primes, 83), 22);
 Program.assertEqual(doSearch(primes, 11), 4);
+
+
+// Selection sort
+// Loops over positions in the array. For each position, it finds the index of the
+// minimum value in the subarry starting at that position.
+// Then it swaps the values at the position and at the minimum index
+
+function swap(array, firstIndex, secondIndex) {
+  var temp = array[firstIndex];
+  array[firstIndex] = array[secondIndex];
+  array[secondIndex] = temp;
+}
+
+function indexOfMinimum(array, startIndex) {
+  var minValue = array[startIndex];
+  var minIndex = startIndex;
+
+  for (var i = minIndex + 1; i < array.length; i++) {
+    if(array[i] < minValue) {
+        minIndex = i;
+        minValue = array[i];
+    }
+  }
+  return minIndex;
+}
+
+function selectionSort(array) {
+  var minIndex;
+  for (var i = 0; i < array.length; i++) {
+    minIndex = indexOfMinimum(array, i);
+    swap(array, i, minIndex);
+  }
+}
+
+
+////////////////////
+//// Project ///////
+////////////////////
+var displayArray = function(array) {
+    textFont(createFont("monospace"), 12);
+
+
+};
+
+var swap = function(array, firstIndex, secondIndex) {
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+};
+var indexOfMinimum = function (array, startIndex) {
+
+    var minValue = array[startIndex];
+    var minIndex = startIndex;
+
+    for (var i = minIndex + 1 ; i < array.length; i++){
+      if(array[i] < minValue) {
+        minIndex = i;
+        minValue = array[i];
+      }
+    }
+    return minIndex;
+};
+
+var selectionSort = function(array) {
+    var minIndex;
+    for(var i = 0; i < array.length; i++) {
+      minIndex = indexOfMinimum(array, i);
+      swap(array, i, minIndex);
+      println(array)
+    }
+
+};
+
+var array = [2, 1, 4, 7, 10, 55, 23];
+array = selectionSort(array);
+
+
+
+
+
+
+
+
+
+
+fill(0, 0, 0);
+var x = 5, y = 12, x_gap = 20, y_gap = 20; // Initial coordinates
+
+
+var displayArray = function(array) {
+    x = 5;
+    textFont(createFont("monospace"), 12);
+
+    for (var i = 0; i < array.length; i++) {
+        text(array[i], x, y); //write array
+        x += x_gap; // move over 20 px
+    }
+};
+
+var swap = function(array, firstIndex, secondIndex) {
+    var temp = array[firstIndex];
+    array[firstIndex] = array[secondIndex];
+    array[secondIndex] = temp;
+};
+var indexOfMinimum = function (array, startIndex) {
+
+    var minValue = array[startIndex];
+    var minIndex = startIndex;
+
+    for (var i = minIndex + 1 ; i < array.length; i++){
+      if(array[i] < minValue) {
+        minIndex = i;
+        minValue = array[i];
+      }
+    }
+    return minIndex;
+};
+
+var selectionSort = function(array) {
+
+    var minIndex;
+    for(var i = 0; i < array.length; i++) {
+
+      displayArray(array);
+      minIndex = indexOfMinimum(array, i);
+
+      if (i !== minIndex) { //draw only if swapped different values
+        // draw from minIndex to the i
+        line(minIndex * x_gap + 10, y + 5, i * x_gap + 10, y + 10);
+        // draw from i to minIndex
+        line(i * x_gap + 10, y + 5, minIndex * x_gap + 10, y + 10);
+        stroke(255, 0, 0);
+        noFill(); // for transparent circles
+          //an elipse centered at the indices with same width and height is a circle
+        ellipse(i * x_gap + 8, y - 4, 12, 12);
+        ellipse(minIndex * x_gap + 8, y-4, 12, 12);
+        stroke(0,0,0); // reset stroke color
+      }
+      swap(array, i, minIndex);
+      y += y_gap;
+      println(array);
+    }
+    displayArray(array);
+    y += y_gap;
+};
+
+var array = [10, 9, 7, 8, 12, 6, 5, 4];
+array = selectionSort(array);
+
+line(x-600, y -10, x, y - 10);
+
+var array = [100, 99, 88, 11, 90, 8, 9];
+array = selectionSort(array);
+
+line(x-600, y -10, x, y - 10);
