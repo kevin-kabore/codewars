@@ -148,13 +148,7 @@ array = selectionSort(array);
 
 
 
-
-
-
-
-
-
-
+//elipse and line logic attributed form external source
 fill(0, 0, 0);
 var x = 5, y = 12, x_gap = 20, y_gap = 20; // Initial coordinates
 
@@ -189,10 +183,8 @@ var indexOfMinimum = function (array, startIndex) {
 };
 
 var selectionSort = function(array) {
-
     var minIndex;
     for(var i = 0; i < array.length; i++) {
-
       displayArray(array);
       minIndex = indexOfMinimum(array, i);
 
@@ -201,12 +193,12 @@ var selectionSort = function(array) {
         line(minIndex * x_gap + 10, y + 5, i * x_gap + 10, y + 10);
         // draw from i to minIndex
         line(i * x_gap + 10, y + 5, minIndex * x_gap + 10, y + 10);
-        stroke(255, 0, 0);
-        noFill(); // for transparent circles
+          stroke(255, 0, 0);
+          noFill(); // for transparent circles
           //an elipse centered at the indices with same width and height is a circle
-        ellipse(i * x_gap + 8, y - 4, 12, 12);
-        ellipse(minIndex * x_gap + 8, y-4, 12, 12);
-        stroke(0,0,0); // reset stroke color
+          ellipse(i * x_gap + 8, y - 4, 12, 12);
+          ellipse(minIndex * x_gap + 8, y-4, 12, 12);
+          stroke(0,0,0); // reset stroke color
       }
       swap(array, i, minIndex);
       y += y_gap;
@@ -214,14 +206,68 @@ var selectionSort = function(array) {
     }
     displayArray(array);
     y += y_gap;
+
 };
 
-var array = [10, 9, 7, 8, 12, 6, 5, 4];
+var array = [10, 9, 7, 8];
 array = selectionSort(array);
-
 line(x-600, y -10, x, y - 10);
 
-var array = [100, 99, 88, 11, 90, 8, 9];
-array = selectionSort(array);
-
+array = [100, 99, 88, 11];
+selectionSort(array);
 line(x-600, y -10, x, y - 10);
+
+array = [10, 9, 8, 7];
+selectionSort(array);
+line(x-600, y -10, x, y - 10);
+
+array = [205, 7, 9, 2];
+selectionSort(array);
+line(x-600, y -10, x, y - 10);
+
+
+////////////////////////////////
+////////////////////////////////
+//////// Insertion Sort ////////
+////////////////////////////////
+////////////////////////////////
+
+var insert = function(array, rightIndex, value) {
+    for(var i = rightIndex; i >= 0 && array[i] > value; i--) {
+        array[i+1] = array[i];
+    }
+    array[i+1] = value;
+};
+
+
+// Insertion sort Pseudocode
+// 1. Call insert to insert the element that starts at index 1 into the sorted subarray in index 0.
+// 2. Call insert to insert the element that starts at index 2 into the sorted subarray in indices 0 through 1.
+// 3. Call insert to insert the element that starts at index 3 into the sorted subarray in indices 0 through 2.
+// 4. …
+// 5. Finally, call insert to insert the element that starts at index n-1 n−1n, minus, 1 into the sorted subarray in indices 0 through n-2 n−2n, minus, 2.
+
+
+var insert = function(array, rightIndex, value) {
+    for(var j = rightIndex;
+        j >= 0 && array[j] > value;
+        j--) {
+        array[j + 1] = array[j];
+    }
+    array[j + 1] = value;
+};
+
+var insertionSort = function(array) {
+    for (var i = 1; i < array.length; i++) {
+        insert(array, i-1, array[i]);
+    }
+};
+
+var array = [22, 11, 99, 88, 9, 7, 42];
+insertionSort(array);
+println("Array after sorting:  " + array);
+Program.assertEqual(array, [7, 9, 11, 22, 42, 88, 99]);
+
+array = [10, -5, 12, 1, 10, 8, 3];
+insertionSort(array);
+Program.assertEqual(array, [-5, 1, 3, 8, 10, 10, 12]);
