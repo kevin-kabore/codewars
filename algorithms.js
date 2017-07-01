@@ -271,3 +271,119 @@ Program.assertEqual(array, [7, 9, 11, 22, 42, 88, 99]);
 array = [10, -5, 12, 1, 10, 8, 3];
 insertionSort(array);
 Program.assertEqual(array, [-5, 1, 3, 8, 10, 10, 12]);
+
+
+////////////////////////////////
+////////////////////////////////
+///////// Recursion ////////////
+////////////////////////////////
+////////////////////////////////
+
+// example factorials
+
+var factorial = function(n) {
+    var result = 1;
+    for(var i = n; i > 0; i--){
+        result = result * i;
+    }
+
+    return result;
+};
+
+// Recursive factorial function
+var factorial = function(n) {
+	var result = 1;
+	// base case:
+	if(n === 0){
+	    return 1;
+	}
+	// recursive case:
+	return factorial(n-1) * n;
+};
+// 1. Each recursive call should be on a smaller instance of the same problem, that is, a smaller subproblem.
+// 2. The recursive calls must eventually reach a base case, which is solved without further recursion.
+
+// Palindrome function
+// 1. if string length is 0 or 1 > true
+// 2. else
+//      first and last same?
+// False? Not palindrome
+//      remove first and last call Pal with prev answer
+//
+
+
+var isPalindrome = function(str) {
+    // base case #1
+    if (str.length <= 1) {
+        return true;
+    }
+    // base case #2
+    if(firstCharacter(str) !== lastCharacter(str)) {
+        return false;
+    } else { // recursive case
+       return isPalindrome(middleCharacters(str));
+    }
+
+};
+
+var checkPalindrome = function(str) {
+    println("Is this word a palindrome? " + str);
+    println(isPalindrome(str));
+};
+
+
+  // Returns the first character of the string str
+var firstCharacter = function(str) {
+    return str.slice(0, 1);
+};
+
+// Returns the last character of a string str
+var lastCharacter = function(str) {
+    return str.slice(-1);
+};
+
+// Returns the string that results from removing the first
+//  and last characters from str
+var middleCharacters = function(str) {
+    return str.slice(1, -1);
+};
+
+
+
+//////////////////////////////////
+//////////////////////////////////
+//////// Recursive Powers ////////
+//////////////////////////////////
+//////////////////////////////////
+var isEven = function(n) {
+    return n % 2 === 0;
+};
+
+var isOdd = function(n) {
+    return !isEven(n);
+};
+
+var power = function(x, n) {
+    println("Computing " + x + " raised to power " + n + ".");
+    // base case
+
+    if(n === 0) {
+        return 1;
+    } else if(n < 0) { // recursive case: n is negative
+        return 1/power(x, -n);
+    }
+
+    if(isOdd(n)) { // recursive case: n is odd
+        return x(power(x, n-1));
+    } else if(isEven(n)) { // recursive case: n is even
+      var p = power(x, n/2);
+      return p * p;
+    }
+};
+
+var displayPower = function(x, n) {
+    println(x + " to the " + n + " is " + power(x, n));
+};
+
+displayPower(3, 0);
+Program.assertEqual(power(3, 0), 1);
