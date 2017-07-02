@@ -387,3 +387,21 @@ var displayPower = function(x, n) {
 
 displayPower(3, 0);
 Program.assertEqual(power(3, 0), 1);
+
+//////////////////////////////
+//////////////////////////////
+//////// Merge Sort /////////
+//////////////////////////////
+//////////////////////////////
+
+
+// Divide, conquer, combine
+var mergeSort = function(array, p, r) {
+    if (p < r) {
+        var q = Math.floor((p + r) /2); // middle array index
+        mergeSort(array, p, q);
+        mergeSort(array, q+1, r);
+        merge(array, p, q, r);
+    }
+
+};
