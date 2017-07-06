@@ -467,3 +467,31 @@ merge(array, 0,
     array.length-1);
 println("Array after merging: " + array);
 Program.assertEqual(array, [2, 3, 6, 7, 9, 11, 12, 14]);
+
+
+
+
+/////////////////////////////
+/////////////////////////////
+//////// Quick Sort /////////
+/////////////////////////////
+/////////////////////////////
+
+//Worst case same as selection and insertion sort
+// Theta(n^2)
+// Average case as good as merge sort Theta(nlgn)
+
+
+// 1. Dive step: Partioning
+// Divide by choosing any element in the subarray array[p..r]. Call this element the pivot.
+// Rearrange the elements in array[p..r] so that all other elements in array[p..r]
+// that are less than or equal to the pivot are to its left and all elements in array[p..r]
+// are to the pivot's right
+////// ALWAYS choose array[r] as the pivot
+////// After partitioning, let q be the index where the pivot ends up
+
+// 2. Conquer by recursively sorting the subarrays array[p..q-1] (all elements to the left of the pivot,
+// which must be less than or equal to the pivot) and array[q+1..r] (all elements to the right of the pivot,
+// which must be greater than the pivot).
+
+// 3. Combine: no need all already sorted since [p..q-1] are < than q and [q+1...r] are > q
